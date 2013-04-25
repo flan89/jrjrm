@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/tx
+		 http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+         http://www.springframework.org/schema/aop 
+         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+   <context:annotation-config/>
+   <context:component-scan base-package="cn.djrj.jrjrm" />
+   <context:property-placeholder location="classpath:jdbc.properties"/>
+   
+   <!-- 配置数据源   采用c3p0数据库连接池 -->
+   <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+   		<property name="driverClass" value="${c3p0.driverClass}" />  
+	    <property name="jdbcUrl" value="${c3p0.url}" />  
+	    <property name="user" value="${c3p0.user}" />  
+	    <property name="password" value="${c3p0.password}" />  
+	    <property name="acquireIncrement" value="${c3p0.acquireIncrement}" />  
+	    <property name="initialPoolSize" value="${c3p0.initialPoolSize}" />  
+	    <property name="maxIdleTime" value="${c3p0.maxIdleTime}" />  
+	    <property name="maxPoolSize" value="${c3p0.maxPoolSize}" />  
+	    <property name="minPoolSize" value="${c3p0.minPoolSize}" />  
+   </bean>
+   
+   <!-- Hibernate SessionFactory 工厂及相关配置 -->
+   <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+   		<property name="dataSource" ref="dataSource" />
+   		
+   		<!-- 配置Hibernate的运行环境 -->
+   		<property name="hibernateProperties">
+	      <props>  
+            <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+            <prop key="current_session_context_class">thread</prop> 
+            <prop key="hibernate.hbm2ddl.auto">none</prop>
+            <prop key="hibernate.show_sql">true</prop> 
+          </props>
+    	</property>
+    	
+    	<!-- 扫描以注解方式配置的对象关系映射 实体类 -->
+    	<property name="packagesToScan">
+    		<list>
+    			<value>cn.djrj.jrjrm.model</value> 
+    		</list>
+    	</property>
+   </bean>
+   
+   <!-- 配置事物管理器 -->
+   <bean id="transactionManager"  class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+   		<property name="sessionFactory" ref="sessionFactory" />
+   </bean>
+  <!-- 启动注解方式配置事物 -->
+   <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

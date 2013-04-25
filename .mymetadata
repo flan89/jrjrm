@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="jrjrm"
+  id="myeclipse.1363071919500"
+  context-root="/jrjrm"
+  j2ee-spec="6.0"
+  archive="jrjrm.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

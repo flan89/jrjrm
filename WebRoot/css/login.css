@@ -1,0 +1,39 @@
+/* CSS Document */
+
+*{margin:0px;padding:0px;}
+body{font-size:12px; background:#d8e7fd; margin:0; padding:0; color:#0795d7;}
+ul,li{ list-style:none;margin:0px;padding:0px;}
+.clear{clear:both;}
+a:link{color:#333333;text-decoration:none;}   
+a:visited{color:#0099FF;text-decoration:none;}   
+a:hover{color:#FF3300;text-decoration:underline;}   
+a:active{color:#636363;text-decoration:none;}	
+img,a img{border:none;}
+.fl { float:left;}
+.fr { float:right;}
+.clearfix { display:inline-block;}
+.margt_13 { margin-top:13px;}
+.margt_5 { margin-top:5px;}
+.magl_10 { margin-left:10px;}
+
+.wrapper { width:1000px; height:681px; margin:0 auto; background:url(../images/login_rj_bj.png) no-repeat;}
+.box { padding-top:15%;_padding-top:10%; margin-left:155px;}
+
+.login_rj_sm_box { width:595px; height:377px; position:relative;}
+.login_rj_shiz { width:224px; height:207px; float:left; background:url(../images/login_rj_shiz.png) no-repeat;}
+.login_rj_tt { width:369px; height:42px; position:absolute; top:3px; right:10px; z-index:99; background:url(../images/login_rj_tt.png) no-repeat;}
+.login_rj_wz { width:110px; height:13px; position:absolute; top:77px; right:0; z-index:99; background:url(../images/login_rj_wz.png) no-repeat;}
+.login_rj_loginbox { width:447px; height:278px; position:absolute; top:99px; left:148px; z-index:999; background:url(../images/login_rj_lobj.png) no-repeat;}
+.login_rj_loginbox ul { width:345px; list-style-type:none; margin:45px auto 0; padding:0;}
+.login_rj_loginbox li { height:33px; line-height:33px; clear:both;}
+
+.lotext_tbx { width:242px; height:33px; line-height:33px; font-family:"微软雅黑"; font-size:14px; background:url(../images/login_rj_lotx.png) no-repeat; margin-left:5px;_margin-left:5px; padding:0 5px; border:0;}
+.lotext_yzm { width:65px; height:33px; line-height:33px; font-family:"微软雅黑"; font-size:14px; background:url(../images/login_yzm.png) no-repeat; margin-left:5px;_margin-left:5px; padding:0 5px; border:0;}
+.lobutt_bom1 { width:88px; height:33px; background:url(../images/login_rj_lodl.png) no-repeat; border:0;}
+.lobutt_bom2 { width:88px; height:33px; background:url(../images/login_rj_lozc.png) no-repeat; border:0;}
+
+.span_1 { font-family:"Adobe 黑体 Std R"; font-size:16px; color:#06abcd; width: 65px; text-align: right; display: block;}
+.span_2 { font-family:"Adobe 黑体 Std R"; font-size:14px; color:#06abcd; float:left; margin-left:70px; line-height:33px;}
+.span_3 { font-family:"Adobe 黑体 Std R"; font-size:14px; color:#06abcd; float:right; margin-right:20px; line-height:33px;}
+.span_4 {  float:left; margin-left:80px;}
+.span_5{  float:left; margin-left:50px;}

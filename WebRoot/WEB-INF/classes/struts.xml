@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.i18n.encoding" value="UTF-8" />
+	
+    <package name="default" namespace="/" extends="struts-default">
+    
+    	<!-- <interceptors>
+			<interceptor name="loginInterceptor" class="cn.djrj.jrjrm.util.LoginInterceptor"></interceptor>
+		</interceptors> -->
+
+       <!--  <default-action-ref name="index" /> -->
+
+        <!-- <global-results>
+            <result name="error">/error.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings> -->
+		
+		<action name="index" class="cn.djrj.jrjrm.oa.action.employee.EmployeeLoginAction" method="simpleLogin">
+			<result name="success">
+				/WEB-INF/index.jsp
+			</result>
+			<result name="false">
+				/login.jsp
+			</result>
+		</action>
+		
+		<action name="varifyCode" class="cn.djrj.jrjrm.oa.action.employee.EmployeeLoginAction" method="showVarifyCodeImg" >
+        </action>
+        
+    </package>
+    
+    <package name="cms" namespace="/crm" extends="struts-default">
+    	
+    	<interceptors>
+			<interceptor name="loginInterceptor" class="cn.djrj.jrjrm.util.LoginInterceptor"></interceptor>
+			<!-- 自定义拦截器栈 -->
+             <interceptor-stack name="myDefaultStack">
+                 <interceptor-ref name="loginInterceptor"></interceptor-ref>                 
+                 <interceptor-ref name="defaultStack"></interceptor-ref>
+            </interceptor-stack>
+		</interceptors>
+		
+		<!-- 将自定义拦截器栈设置默认的拦截器 -->
+        <default-interceptor-ref name="myDefaultStack"></default-interceptor-ref>
+    	
+    	<!-- 采用JSP隐藏后进行页面跳转 -->
+    	<action name="show_*" class="cn.djrj.jrjrm.crm.action.custom.CustomShowPageAction" method="showPage">
+    		<result name="success">
+    			/WEB-INF/crm/cus_{1}.jsp
+    		</result>
+    	</action>
+    	
+    	<!-- 返回json数据 -->
+    	<!-- 添加新用户 -->
+    	<action name="cus_addcustom" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="addNewCustom" />
+    	<action name="cus_showaddpage" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="showNewCustomPage" />
+    	
+    	<!-- 显示所有用户 分页列表信息 -->
+    	<action name="cus_list" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="showCustomList" ></action>
+    	<!-- 显示单一用户具体信息 -->
+        <action name="cus_detail" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="showCustomDetail"></action>
+        <!-- 显示某个用户所拥有的权限 -->
+        <action name="cus_rights" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="showCustomRights"></action>
+        <!-- 保存编辑后的用户基本信息 -->
+        <action name="cus_saveinfo" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="saveCustomInfo"></action>
+        <!-- 保存编辑后的用户权限 -->
+        <action name="cus_saverights" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="saveCustomRights"></action>
+        <!-- 删除用户的某些权限 -->
+        <action name="cus_removerights" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="removeCustomRights"></action>
+        
+        <!-- 启用/停用  某个用户账号 -->
+        <action name="cus_freeze" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="isFreeze"></action>
+        <!-- 为某个用户进行批量授权 -->
+        <action name="cus_giverights" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="geivRights"></action>
+        <!-- 显示工作人员自定义权限组 名字   用于在 为客户授权页面显示下拉列表-->
+        <action name="cus_groupname" class="cn.djrj.jrjrm.crm.action.custom.CustomInfoManageAction" method="showRightsGroupName"></action>
+        
+        
+        <!-- 显示工作人员自定义的权限组列表 -->
+        <action name="cus_rightsgrouplist" class="cn.djrj.jrjrm.crm.action.custom.CustomRightsManageAction" method="showRightsGroup"></action>
+        <!-- 编辑工作人员自定义的某个权限组 -->
+        <action name="cus_saverightofgroup" class="cn.djrj.jrjrm.crm.action.custom.CustomRightsManageAction" method="saveRightsOfGroup"></action>
+        <!-- 保存工作人员添加或修改后的 权限组信息  -->
+        <action name="cus_savegroupinfo" class="cn.djrj.jrjrm.crm.action.custom.CustomRightsManageAction" method="saveInfoOfGroup"></action>
+        <!-- 删除员工创建的 权限组 -->
+        <action name="cus_removegroupinfo" class="cn.djrj.jrjrm.crm.action.custom.CustomRightsManageAction" method="removeGroupInfo"></action>
+        <!-- 删除 某个权限组 中的权限 -->
+        <action name="cus_removerightsofgroup" class="cn.djrj.jrjrm.crm.action.custom.CustomRightsManageAction" method="removeRightOfGroup"></action>
+        
+        <!-- 显示某个权限组中的所拥有的权限 -->
+        <action name="cus_showrightsofgroup" class="cn.djrj.jrjrm.crm.action.custom.CustomRightsManageAction" method="showRightsOfGroup"></action>
+        <!-- 显示软件产品的所有权限  -->
+        <action name="cus_allrights" class="cn.djrj.jrjrm.crm.action.custom.CustomRightsManageAction" method="showAllRights"></action>
+        <!-- 保存修改后的权限组中的权限 -->
+        <action name="cus_saverightsgroup" class="cn.djrj.jrjrm.crm.action.custom.CustomRightsManageAction" method="saveRightsOfGroup"></action>
+        
+        <!-- 显示用户登录日志 -->
+        <action name="cus_showloginlog" class="cn.djrj.jrjrm.crm.action.custom.CustomLoginLogAction" method="showCusLoginLog" ></action>
+        <action name="cus_showloginnum" class="cn.djrj.jrjrm.crm.action.custom.CustomLoginLogAction" method="showTodayLoginCus" ></action>
+    </package>
+
+
+</struts>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
